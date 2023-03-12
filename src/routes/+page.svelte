@@ -6,16 +6,16 @@
 
 	const handleFileChange = (event) => {
 		for (let file of event?.target?.files) {
-			formData.append('photo', file);
+			formData.append('photos', file);
 		}
-
-		const handleCreatePost = async () => {
-			formData.append('caption', caption);
-			formData.append('user', $currentUser.id);
-			await pb.collection('posts').create(formData);
-			caption = '';
-		};
 	};
+	const handleCreatePost = async () => {
+		formData.append('caption', caption);
+		formData.append('user', $currentUser.id);
+		await pb.collection('posts').create(formData);
+		caption = '';
+	};
+
 	// $: console.log('caption', caption);
 </script>
 
@@ -40,7 +40,9 @@
 						class="file-input-bordered file-input w-full max-w-xs"
 						on:change={handleFileChange}
 					/>
-					<button class="btn-primary btn-block btn" on:click={handleCreatePost}>Create Post</button>
+					<label for="my-modal-4" class="btn-primary btn-block btn btn" on:click={handleCreatePost}
+						>Create post</label
+					>
 				</div>
 			</label>
 		</label>
